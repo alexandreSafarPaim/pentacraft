@@ -1,0 +1,27 @@
+{
+    "name": "alexandresafarpaim/pentacraft",
+    "description": "Comandos para agilidade no desenvolvimento de uma api rest com laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Alexandresafarpaim\\Pentacraft\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexandre Paim",
+            "email": "alexandresafarpaim@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alexandresafarpaim\\Pentacraft\\PentacraftServiceProvider"
+            ]
+        }
+    }
+
+}
