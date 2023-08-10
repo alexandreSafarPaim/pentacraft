@@ -22,7 +22,7 @@ class PentacraftServiceProvider extends ServiceProvider
             ]);
 
             $this->publishes([
-                __DIR__ . '/examples' => public_path('pentacraft/examples'),
+                __DIR__ . '/templates' => public_path('pentacraft/templates'),
             ], 'pentacraft');
         }
     }

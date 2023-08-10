@@ -73,7 +73,7 @@ class CraftController extends Command
             return;
         }
 
-        $defaultPath = __DIR__ . '/../../examples/Controller.example';
+        $defaultPath = __DIR__ . '/../../templates/Controller.template';
         $file = env('PENTACRAFT_CONTROLLER', $defaultPath);
         if($file == "") $file = $defaultPath;
         $content = file_get_contents($file);

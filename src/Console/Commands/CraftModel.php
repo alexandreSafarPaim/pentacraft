@@ -39,7 +39,7 @@ class CraftModel extends Command
 
         //Model
 
-        $defaultPath = __DIR__ . '/../../examples/Model.example';
+        $defaultPath = __DIR__ . '/../../templates/Model.template';
         $file = env('PENTACRAFT_MODEL', $defaultPath);
         if($file == "") $file = $defaultPath;
         $content = file_get_contents($file);
