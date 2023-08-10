@@ -51,7 +51,7 @@ class CraftModel extends Command
         $content = file_get_contents($file);
         $content = preg_replace('/use Illuminate\\\\Database\\\\Eloquent\\\\Model;/i', "use Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Builder;", $content);
         if($soft){
-            $content = preg_replace('use Illuminate\Database\Eloquent\Builder;', "use Illuminate\Database\Eloquent\Builder;\nuse Illuminate\Database\Eloquent\SoftDeletes;", $content);
+            $content = preg_replace('/use Illuminate\\\\Database\\\\Eloquent\\\\Builder;/i', "use Illuminate\Database\Eloquent\Builder;\nuse Illuminate\Database\Eloquent\SoftDeletes;", $content);
             $content = preg_replace('/use HasFactory;/i', "use SoftDeletes;\n\n       use HasFactory;", $content);
         }
         $content = preg_replace('/use HasFactory;/i', "use HasFactory;\n\n" .$this->createFillable(). "\n\n". $this->createCasts(). "\n\n". $this->createScopeFilter(), $content);
