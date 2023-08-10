@@ -25,67 +25,59 @@ class CraftModel extends Command
      */
     public function handle(): void
     {
-        // create a model file in app/Models called {name}.php and wait for it to finish
+        //prevent console alert
+
         $name = $this->argument('name');
         $migration = $this->option('migration');
         $controller = $this->option('controller');
         $soft = $this->option('soft');
-        $this->call('make:model', ['name' => "{$name}"]);
-        if($migration){
-            $this->call('make:migration', ['name' => "create_". $this->pluralize(strtolower($name)) ."_table"]);
+
+        if(file_exists(app_path("Models/{$name}.php"))){
+            echo "\n   \e[41m ERROR \e[0m\e[49m\e[97m Model {$name} já existe! \e[0m\n";
+            return;
         }
 
+        //Model
+
+        $defaultPath = __DIR__ . '/../../examples/Model.example';
+        $file = env('PENTACRAFT_MODEL', $defaultPath);
+        if($file == "") $file = $defaultPath;
+        $content = file_get_contents($file);
+        $content = preg_replace('/@@name/i', $name, $content);
+        if($soft){
+            $content = preg_replace('/@@soft_import/i', "use Illuminate\Database\Eloquent\SoftDeletes;", $content);
+            $content = preg_replace('/@@soft_use/i', "use SoftDeletes;", $content);
+        }
+
+        $content = preg_replace('/@@.*/i', '', $content);
+        $content = preg_replace('/\n\n\n/i', "\n\n", $content);
+
+        $file = app_path("Models/{$name}.php");
+        file_put_contents($file, $content);
+
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Model criado! \e[0m\n";
+
+
+        //Migration
+
+        if($migration){
+            $this->callSilent('make:migration', ['name' => "create_". $this->pluralize(strtolower($name)) ."_table"]);
+        }
         if($soft){
             $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
             $content = file_get_contents($file);
             $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n        \$table->softDeletes();", $content);
             file_put_contents($file, $content);
         }
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Migration criada! \e[0m\n";
 
+
+        //Controller
         if($controller){
             $this->call('pcraft:controller', ['name' => "{$name}Controller"]);
         }
 
 
-        $file = app_path("Models/{$name}.php");
-        $content = file_get_contents($file);
-        $content = preg_replace('/use Illuminate\\\\Database\\\\Eloquent\\\\Model;/i', "use Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Builder;", $content);
-        if($soft){
-            $content = preg_replace('/use Illuminate\\\\Database\\\\Eloquent\\\\Builder;/i', "use Illuminate\Database\Eloquent\Builder;\nuse Illuminate\Database\Eloquent\SoftDeletes;", $content);
-            $content = preg_replace('/use HasFactory;/i', "use SoftDeletes;\n\n    use HasFactory;", $content);
-        }
-        $content = preg_replace('/use HasFactory;/i', "use HasFactory;\n\n" .$this->createFillable(). "\n\n". $this->createCasts(). "\n\n". $this->createScopeFilter(), $content);
-        file_put_contents($file, $content);
-
-    }
-
-    private function createFillable(){
-        $fillableString = "    protected \$fillable = [
-    ];";
-
-        return $fillableString;
-    }
-
-    private function createCasts(){
-        $castsString = "    protected \$casts = [
-    ];";
-
-        return $castsString;
-    }
-
-    private function createScopeFilter(){
-        $scopeString = "    public function scopeFilter(Builder \$query, array \$filters)
-    {
-        foreach (\$filters as \$filter => \$value) {
-            if (\$value === null) {
-                continue;
-            }
-            \$query->where(\$filter, \$value);
-        }
-
-        return \$query;
-    }";
-        return $scopeString;
     }
 
     public static function pluralize($singular) {

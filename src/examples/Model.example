@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+@@soft_import
+
+class @@name extends Model
+{
+    @@soft_use
+    use HasFactory;
+
+    protected $fillable = [
+        ];
+
+    protected $casts = [
+        ];
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        foreach ($filters as $filter => $value) {
+            if ($value === null) {
+                continue;
+            }
+            $query->where($filter, $value);
+        }
+
+        return $query;
+    }
+}

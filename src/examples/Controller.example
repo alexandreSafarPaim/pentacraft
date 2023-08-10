@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+@@model_import
+@@resource_import
+@@request_import
+
+class @@controller_name extends Controller
+{
+
+    public function index(Request $request)
+    {
+        $filters = $request->all();
+        $data = @@model::filter($filters);
+        if($request->has('paginate')){
+            $data = $data->paginate($request->paginate);
+        }else{
+            $data = $data->get();
+        }
+        return @@resource::collection($data);
+    }
+
+    public function show(Request $request, @@model $Massive)
+    {
+        return new @@resource($Massive);
+    }
+
+    public function store(@@request_create $request)
+    {
+        $data = $request->all();
+        $data = @@model::create($data);
+        return new @@resource($data);
+    }
+
+    public function update(@@request_update $request, @@model $model)
+    {
+        $data = $request->all();
+        $model->update($data);
+        return new @@resource($model);
+    }
+
+    public function destroy(Request $request, @@model $model)
+    {
+        $model->delete();
+        return response()->json(['message' => 'Deletado com sucesso'], 200);
+    }
+
+}
