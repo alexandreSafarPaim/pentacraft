@@ -31,7 +31,7 @@ class CraftModel extends Command
         $controller = $this->option('controller');
         $this->call('make:model', ['name' => "{$name}"]);
         if($migration){
-            $this->call('make:migration', ['name' => "create_". str_plural(strtolower($name)) ."_table"]);
+            $this->call('make:migration', ['name' => "create_". $this->pluralize(strtolower($name)) ."_table"]);
         }
 
         if($controller){
@@ -74,5 +74,17 @@ class CraftModel extends Command
             return \$query;
         }";
         return $scopeString;
+    }
+
+    public static function pluralize($singular) {
+        $last_letter = strtolower($singular[strlen($singular)-1]);
+        switch($last_letter) {
+            case 'y':
+                return substr($singular,0,-1).'ies';
+            case 's':
+                return $singular.'es';
+            default:
+                return $singular.'s';
+        }
     }
 }
