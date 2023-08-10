@@ -22,9 +22,9 @@ class @@controller_name extends Controller
         return @@resource::collection($data);
     }
 
-    public function show(Request $request, @@model $Massive)
+    public function show(Request $request, @@model @@model_var)
     {
-        return new @@resource($Massive);
+        return new @@resource(@@model_var);
     }
 
     public function store(@@request_create $request)
@@ -34,16 +34,16 @@ class @@controller_name extends Controller
         return new @@resource($data);
     }
 
-    public function update(@@request_update $request, @@model $model)
+    public function update(@@request_update $request, @@model @@model_var)
     {
         $data = $request->all();
-        $model->update($data);
-        return new @@resource($model);
+        @@model_var->update($data);
+        return new @@resource(@@model_var);
     }
 
-    public function destroy(Request $request, @@model $model)
+    public function destroy(Request $request, @@model @@model_var)
     {
-        $model->delete();
+        @@model_var->delete();
         return response()->json(['message' => 'Deletado com sucesso'], 200);
     }
 
