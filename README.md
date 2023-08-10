@@ -6,7 +6,7 @@ O Pentacraft é uma biblioteca poderosa e eficiente desenvolvida para facilitar 
 
 > Modelo de desenvolvimento: Pentagrama Consultoria e Sistemas
 
-> Release atual: 1.0.1
+> Release atual: 1.1.0
 
 
 ## Recurso Principal:

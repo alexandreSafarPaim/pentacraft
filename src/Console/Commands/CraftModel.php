@@ -11,14 +11,14 @@ class CraftModel extends Command
      *
      * @var string
      */
-    protected $signature = 'pcraft:model {name : Nome do Model} {--m|migration : Criar uma Migration} {--c|controller : Criar um Controller}';
+    protected $signature = 'pcraft:model {name : Nome do Model} {--m|migration : Criar uma Migration} {--c|controller : Criar um Controller} {--s|soft : Criar um SoftDelete}}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '[Modelo Base Pentagrama] Cria um Model com fillable, casts e scopeFilter. Opcionalmente pode cria uma Migration e um Controller';
+    protected $description = '[Modelo Base Pentagrama] Cria um Model com fillable, casts e scopeFilter. Opcionalmente pode cria uma Migration, um Controller e/ou um SoftDelete.';
 
     /**
      * Execute the console command.
@@ -29,9 +29,17 @@ class CraftModel extends Command
         $name = $this->argument('name');
         $migration = $this->option('migration');
         $controller = $this->option('controller');
+        $soft = $this->option('soft');
         $this->call('make:model', ['name' => "{$name}"]);
         if($migration){
             $this->call('make:migration', ['name' => "create_". $this->pluralize(strtolower($name)) ."_table"]);
+        }
+
+        if($soft){
+            $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
+            $content = file_get_contents($file);
+            $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n            \$table->softDeletes();", $content);
+            file_put_contents($file, $content);
         }
 
         if($controller){
@@ -42,6 +50,10 @@ class CraftModel extends Command
         $file = app_path("Models/{$name}.php");
         $content = file_get_contents($file);
         $content = preg_replace('/use Illuminate\\\\Database\\\\Eloquent\\\\Model;/i', "use Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Builder;", $content);
+        if($soft){
+            $content = preg_replace('/use Illuminate\Database\Eloquent\Builder;/i', "use Illuminate\Database\Eloquent\Builder;\nuse Illuminate\Database\Eloquent\SoftDeletes;", $content);
+            $content = preg_replace('/use HasFactory;/i', "use SoftDeletes;\n\nuse HasFactory;", $content);
+        }
         $content = preg_replace('/use HasFactory;/i', "use HasFactory;\n\n" .$this->createFillable(). "\n\n". $this->createCasts(). "\n\n". $this->createScopeFilter(), $content);
         file_put_contents($file, $content);
 
