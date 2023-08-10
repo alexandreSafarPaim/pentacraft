@@ -31,7 +31,7 @@ class CraftModel extends Command
         $controller = $this->option('controller');
         $this->call('make:model', ['name' => "{$name}"]);
         if($migration){
-            $this->call('make:migration', ['name' => "create_". strtolower($name) ."_table"]);
+            $this->call('make:migration', ['name' => "create_". str_plural(strtolower($name)) ."_table"]);
         }
 
         if($controller){
