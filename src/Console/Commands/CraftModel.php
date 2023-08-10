@@ -61,30 +61,30 @@ class CraftModel extends Command
 
     private function createFillable(){
         $fillableString = "    protected \$fillable = [
-            ];";
+    ];";
 
         return $fillableString;
     }
 
     private function createCasts(){
         $castsString = "    protected \$casts = [
-            ];";
+    ];";
 
         return $castsString;
     }
 
     private function createScopeFilter(){
         $scopeString = "    public function scopeFilter(Builder \$query, array \$filters)
-        {
-            foreach (\$filters as \$filter => \$value) {
-                if (\$value === null) {
-                    continue;
-                }
-                \$query->where(\$filter, \$value);
+    {
+        foreach (\$filters as \$filter => \$value) {
+            if (\$value === null) {
+                continue;
             }
+            \$query->where(\$filter, \$value);
+        }
 
-            return \$query;
-        }";
+        return \$query;
+    }";
         return $scopeString;
     }
 

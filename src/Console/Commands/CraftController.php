@@ -65,54 +65,54 @@ class CraftController extends Command
 
     private function indexFunction($name){
         $indexFunctionString = "    public function index(Request \$request)
-        {
-            \$filters = \$request->all();
-            \$data = $name::filter(\$filters);
-            if(\$request->has('paginate')){
-                \$data = \$data->paginate(\$request->paginate);
-            }else{
-                \$data = \$data->get();
-            }
-            return ".$name."Resource::collection(\$data);
-        }";
+    {
+        \$filters = \$request->all();
+        \$data = $name::filter(\$filters);
+        if(\$request->has('paginate')){
+            \$data = \$data->paginate(\$request->paginate);
+        }else{
+            \$data = \$data->get();
+        }
+        return ".$name."Resource::collection(\$data);
+    }";
         return $indexFunctionString;
     }
 
 
     private function showFunction($name){
         $showFunctionString = "    public function show(Request \$request, ".$name. " \$$name)
-        {
-            return new ".$name."Resource(\$$name);
-        }";
+    {
+        return new ".$name."Resource(\$$name);
+    }";
         return $showFunctionString;
     }
 
     private function createFunction($name){
         $createFunctionString = "    public function store(Create{$name}Request \$request)
-        {
-            \$data = \$request->all();
-            \$data = {$name}::create(\$data);
-            return new {$name}Resource(\$data);
-        }";
+    {
+        \$data = \$request->all();
+        \$data = {$name}::create(\$data);
+        return new {$name}Resource(\$data);
+    }";
         return $createFunctionString;
     }
 
     private function updateFunction($name){
         $updateFunctionString = "    public function update(Update{$name}Request \$request, ".$name. " \$$name)
-        {
-            \$data = \$request->all();
-            \${$name}->update(\$data);
-            return new {$name}Resource(\$$name);
-        }";
+    {
+        \$data = \$request->all();
+        \${$name}->update(\$data);
+        return new {$name}Resource(\$$name);
+    }";
         return $updateFunctionString;
     }
 
     private function deleteFunction($name){
         $deleteFunctionString = "    public function destroy(Request \$request, ".$name. " \$$name)
-        {
-            \${$name}->delete();
-            return response()->json(['message' => 'Deletado com sucesso'], 200);
-        }";
+    {
+        \${$name}->delete();
+        return response()->json(['message' => 'Deletado com sucesso'], 200);
+    }";
         return $deleteFunctionString;
     }
 
