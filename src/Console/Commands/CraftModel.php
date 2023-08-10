@@ -38,7 +38,7 @@ class CraftModel extends Command
         if($soft){
             $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
             $content = file_get_contents($file);
-            $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n            \$table->softDeletes();", $content);
+            $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n        \$table->softDeletes();", $content);
             file_put_contents($file, $content);
         }
 
