@@ -13,10 +13,10 @@ class @@name extends Model
     use HasFactory;
 
     protected $fillable = [
-        ];
+    ];
 
     protected $casts = [
-        ];
+    ];
 
     public function scopeFilter(Builder $query, array $filters)
     {

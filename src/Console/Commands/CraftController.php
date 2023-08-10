@@ -83,6 +83,7 @@ class CraftController extends Command
 
         $content = preg_replace('/@@controller_name/i', $name.'Controller', $content);
         $content = preg_replace('/@@model/i', $name, $content);
+        $content = preg_replace('/@@model_var/i', strtolower($name), $content);
         $content = preg_replace('/@@resource/i', $name.'Resource', $content);
         $content = preg_replace('/@@request_create/i', 'Create'.$name.'Request', $content);
         $content = preg_replace('/@@request_update/i', 'Update'.$name.'Request', $content);
