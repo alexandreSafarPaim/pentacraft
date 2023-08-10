@@ -13,7 +13,7 @@ class @@controller_name extends Controller
     public function index(Request $request)
     {
         $filters = $request->all();
-        $data = @@model::filter($filters);
+        $data = @@model_name::filter($filters);
         if($request->has('paginate')){
             $data = $data->paginate($request->paginate);
         }else{
@@ -22,7 +22,7 @@ class @@controller_name extends Controller
         return @@resource::collection($data);
     }
 
-    public function show(Request $request, @@model @@model_var)
+    public function show(Request $request, @@model_name @@model_var)
     {
         return new @@resource(@@model_var);
     }
@@ -30,18 +30,18 @@ class @@controller_name extends Controller
     public function store(@@request_create $request)
     {
         $data = $request->all();
-        $data = @@model::create($data);
+        $data = @@model_name::create($data);
         return new @@resource($data);
     }
 
-    public function update(@@request_update $request, @@model @@model_var)
+    public function update(@@request_update $request, @@model_name @@model_var)
     {
         $data = $request->all();
         @@model_var->update($data);
         return new @@resource(@@model_var);
     }
 
-    public function destroy(Request $request, @@model @@model_var)
+    public function destroy(Request $request, @@model_name @@model_var)
     {
         @@model_var->delete();
         return response()->json(['message' => 'Deletado com sucesso'], 200);
