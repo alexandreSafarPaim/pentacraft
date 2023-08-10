@@ -50,7 +50,7 @@ Serão criados os arquivos necessários para sua API, incluindo o modelo, a migr
 php artisan vendor:publish --tag=pentacraft
 ```
 
-Serão publicados os modelos de Model e Controller na pasta ```public/pentacraft/examples``` do seu projeto.
+Serão publicados os modelos de Model e Controller na pasta ```public/pentacraft/templates``` do seu projeto.
 
 Atualize o novo caminho no .env com a variável ```PENTACRAFT_MODEL``` e ```PENTACRAFT_CONTROLLER```
 
