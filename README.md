@@ -74,7 +74,7 @@ Os modelos podem ser editado como quiser! Ele possui variáveis que serão subst
 @@resource_import - Importação do resource
 @@request_import - Importação dos requests
 @@controller_name - Nome do controlador 
-@@model - Nome do modelo
+@@model_name - Nome do modelo
 @@model_var - Nome do modelo em variável
 @@resource - Nome do resource
 @@request_create - Nome do request de criação
