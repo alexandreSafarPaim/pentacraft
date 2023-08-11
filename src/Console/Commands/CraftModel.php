@@ -66,7 +66,7 @@ class CraftModel extends Command
         if($soft){
             $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
             $content = file_get_contents($file);
-            $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n    \$table->softDeletes();", $content);
+            $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n            \$table->softDeletes();", $content);
             file_put_contents($file, $content);
         }
         echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Migration criada! \e[0m\n";
@@ -74,7 +74,7 @@ class CraftModel extends Command
 
         //Controller
         if($controller){
-            $this->call('pcraft:controller', ['name' => "{$name}Controller"]);
+            $this->call('pcraft:controller', ['name' => "{$name}Controller", '--model' => false, '--soft' => $soft]);
         }
 
 

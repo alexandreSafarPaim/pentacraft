@@ -14,11 +14,13 @@ class @@controller_name extends Controller
     {
         $filters = $request->all();
         $data = @@model_name::filter($filters);
-        if($request->has('paginate')){
-            $data = $data->paginate($request->paginate);
+
+        if($request->has('per_page')){
+            $data = $data->paginate($request->per_page);
         }else{
             $data = $data->get();
         }
+
         return @@resource::collection($data);
     }
 
@@ -46,5 +48,7 @@ class @@controller_name extends Controller
         @@model_var->delete();
         return response()->json(['message' => 'Deletado com sucesso'], 200);
     }
+
+    @@soft
 
 }

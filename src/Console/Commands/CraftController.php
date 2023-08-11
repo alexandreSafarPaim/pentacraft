@@ -11,7 +11,7 @@ class CraftController extends Command
      *
      * @var string
      */
-    protected $signature = 'pcraft:controller {name : Nome do controller} {--m|model : Criar um Model}';
+    protected $signature = 'pcraft:controller {name : Nome do controller} {--m|model : Criar um Model} {--s|soft : Adiciona funções de SoftDelete}';
 
     /**
      * The console command description.
@@ -26,13 +26,16 @@ class CraftController extends Command
     public function handle(): void
     {
         $name = $this->argument('name');
+
         if(strpos($name, 'Controller') !== false){
             $name = str_replace('Controller', '', $name);
         }
+
         $model = $this->option('model');
+        $soft = $this->option('soft');
 
         if($model){
-            $this->call('pcraft:model', ['name' => "{$name}", '--migration' => true, '--controller' => false]);
+            $this->call('pcraft:model', ['name' => "{$name}", '--migration' => true, '--controller' => false, '--soft' => $soft]);
         }
 
         //verificar se o resource existe
@@ -88,6 +91,14 @@ class CraftController extends Command
         $content = preg_replace('/@@request_create/i', 'Create'.$name.'Request', $content);
         $content = preg_replace('/@@request_update/i', 'Update'.$name.'Request', $content);
 
+        if($soft){
+            //add restore function
+            $content = preg_replace('/@@soft/i', $this->restoreFunction($name), $content);
+        }else{
+            $content = preg_replace('/@@soft/i', '', $content);
+        }
+
+
         $fileController = app_path("Http/Controllers/{$name}Controller.php");
         file_put_contents($fileController, $content);
 
@@ -97,11 +108,23 @@ class CraftController extends Command
         $routeFile = base_path("routes/api.php");
         $routeContent = file_get_contents($routeFile);
         $routeContent .= "\nRoute::apiResource('".strtolower($name)."', \App\Http\Controllers\\{$name}Controller::class);\n";
+        if($soft) {
+            $routeContent .= "Route::put('".strtolower($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n";
+        }
         file_put_contents($routeFile, $routeContent);
 
         echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Rota criada! \e[0m\n";
 
 
+    }
+
+    private function restoreFunction($name){
+        return "public function restore(\$id)
+    {
+        \$".strtolower($name)." = {$name}::withTrashed()->findOrFail(\$id);
+        \$".strtolower($name)."->restore();
+        return response()->json(['message' => 'Restaurado com sucesso!']);
+    }";
     }
 
 }

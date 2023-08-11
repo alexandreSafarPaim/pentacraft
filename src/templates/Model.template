@@ -20,10 +20,18 @@ class @@name extends Model
 
     public function scopeFilter(Builder $query, array $filters)
     {
+        $ignore = [
+            'per_page',
+            'page',
+        ];
+
         foreach ($filters as $filter => $value) {
-            if ($value === null) {
+            if ($value === null || in_array($filter, $ignore)) {
                 continue;
             }
+
+            // TODO: add filter logic
+
             $query->where($filter, $value);
         }
 
