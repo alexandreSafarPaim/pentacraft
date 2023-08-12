@@ -56,7 +56,7 @@ The Model and Controller templates will be published in the ```public/pentacraft
 Update the new path in the .env with the variable ```PENTACRAFT_MODEL``` and ```PENTACRAFT_CONTROLLER```
 
 
-## Configuring the templates
+## Setup the templates
 
 Templates can be edited however you want! It has variables that will be replaced by the template creation command.
 
