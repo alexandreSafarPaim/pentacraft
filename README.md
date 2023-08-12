@@ -8,6 +8,7 @@ O Pentacraft é uma biblioteca poderosa e eficiente desenvolvida para facilitar 
 
 > Release atual: v1.3.0
 
+***[**&rarr; Documentação em ingles**](intl/README_EN.md)***
 
 ## Recurso Principal:
 
