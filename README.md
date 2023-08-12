@@ -1,4 +1,4 @@
-# Pentacraft: Biblioteca para Desenvolvimento rápido de APIs REST no Laravel
+# Pentacraft: Biblioteca para desenvolvimento rápido de uma APIs REST no Laravel
 
 O Pentacraft é uma biblioteca poderosa e eficiente desenvolvida para facilitar a criação de APIs REST no Laravel, permitindo que você desenvolva projetos de maneira ágil e eficaz. Com uma série de comandos úteis e recursos prontos para uso, o Pentacraft simplifica o processo de criação de APIs, permitindo que você se concentre no que realmente importa: a lógica do seu aplicativo.
 
