@@ -8,7 +8,7 @@ Pentacraft is a powerful and efficient library designed to facilitate the creati
 
 > Current release: v1.3.0
 
-[a relative link](../README.md)
+***[**&rarr; Documentation in pt_br**](../README.md)***
 
 ## Main Feature:
 
