@@ -30,16 +30,16 @@ composer require alexandresafarpaim/pentacraft
 ```bash
 php artisan pcraft:model <model name> {-m | --migration} {-c | --controller} {-s | --soft}
 ```
-> -m or --migration: Create model migration
+> -m or --migration: Create the Migration
 
-> -c or --controller: Create the model controller
+> -c or --controller: Create the Controller
 
-> -s or --soft: Add soft delete to the Model
+> -s or --soft: Add softDeletes to the Model
 
 ```bash
 php artisan pcraft:controller <controller name> {-m | --mod el}
 ```
-> -m or --model: Create the controller model
+> -m or --model: Create the Model
 
 
 The necessary files for your API will be created, including the model, migration, controller, request, resource and routes.
