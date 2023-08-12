@@ -34,7 +34,7 @@ php artisan pcraft:model <model name> {-m | --migration} {-c | --controller} {-s
 
 > -c or --controller: Create the model controller
 
-> -s or --soft: Add soft delete to the template
+> -s or --soft: Add soft delete to the Model
 
 ```bash
 php artisan pcraft:controller <controller name> {-m | --mod el}
