@@ -11,7 +11,7 @@ class RemoveCraft extends Command
      *
      * @var string
      */
-    protected $signature = 'pcraft:remove {name : Nome do Model a ser removido} {--m|migration : Remover a Migration} {--c|controller : Remover o Controller} {--controller-only : Remover apenas o Controller} {migration-only : Remover apenas a Migration}';
+    protected $signature = 'pcraft:remove {name : Nome do Model a ser removido} {--m|migration : Remover a Migration} {--c|controller : Remover o Controller} {--controller-only : Remover apenas o Controller} {--migration-only : Remover apenas a Migration}';
 
     /**
      * The console command description.
