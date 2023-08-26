@@ -2,6 +2,7 @@
 
 namespace Alexandresafarpaim\Pentacraft;
 
+use Alexandresafarpaim\Pentacraft\Console\Commands\RemoveCraft;
 use Illuminate\Support\ServiceProvider;
 use Alexandresafarpaim\Pentacraft\Console\Commands\CraftModel;
 use Alexandresafarpaim\Pentacraft\Console\Commands\CraftController;
@@ -19,6 +20,7 @@ class PentacraftServiceProvider extends ServiceProvider
             $this->commands([
                 CraftModel::class,
                 CraftController::class,
+                RemoveCraft::class,
             ]);
 
             $this->publishes([
