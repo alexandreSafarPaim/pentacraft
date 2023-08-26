@@ -61,10 +61,10 @@ class CraftModel extends Command
         //Migration
 
         if($migration){
-            $this->callSilent('make:migration', ['name' => "create_". $this->snakeCase($name) ."_table"]);
+            $this->callSilent('make:migration', ['name' => "create_". $this->pluralize($this->snakeCase($name)) ."_table"]);
         }
         if($soft){
-            $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
+            $file = glob(database_path('migrations/*create_'. $this->pluralize($this->snakeCase($name)) .'_table.php'))[0];
             $content = file_get_contents($file);
             $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n            \$table->softDeletes();", $content);
             file_put_contents($file, $content);

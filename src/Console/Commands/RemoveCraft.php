@@ -53,7 +53,7 @@ class RemoveCraft extends Command
     }
 
     public function removeMigration($name){
-        $migration = $this->snakeCase($name);
+        $migration = $this->pluralize($this->snakeCase($name));
         $migration = "create_{$migration}_table.php";
         $migrationFile = glob(database_path("migrations/*{$migration}"));
         if(count($migrationFile) > 0){
@@ -123,9 +123,21 @@ class RemoveCraft extends Command
         }
     }
 
-
     public function snakeCase($string)
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+    }
+
+
+    public function pluralize($singular) {
+        $last_letter = strtolower($singular[strlen($singular)-1]);
+        switch($last_letter) {
+            case 'y':
+                return substr($singular,0,-1).'ies';
+            case 's':
+                return $singular.'es';
+            default:
+                return $singular.'s';
+        }
     }
 }
