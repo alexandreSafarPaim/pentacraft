@@ -61,7 +61,7 @@ class CraftModel extends Command
         //Migration
 
         if($migration){
-            $this->callSilent('make:migration', ['name' => "create_". $this->pluralize(strtolower($name)) ."_table"]);
+            $this->callSilent('make:migration', ['name' => "create_". $this->snakeCase($name) ."_table"]);
         }
         if($soft){
             $file = glob(database_path('migrations/*create_'. $this->pluralize(strtolower($name)) .'_table.php'))[0];
@@ -80,7 +80,11 @@ class CraftModel extends Command
 
     }
 
-    public static function pluralize($singular) {
+    public function snakeCase($string) {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+    }
+
+    public function pluralize($singular) {
         $last_letter = strtolower($singular[strlen($singular)-1]);
         switch($last_letter) {
             case 'y':

@@ -6,7 +6,7 @@ O Pentacraft é uma biblioteca poderosa e eficiente desenvolvida para facilitar 
 
 > Modelo de desenvolvimento: Pentagrama Consultoria e Sistemas
 
-> Release atual: v1.3.0
+> Release atual: v1.3.2
 
 ***[**&rarr; Documentação em inglês**](intl/README_EN.md)***
 
@@ -41,8 +41,20 @@ php artisan pcraft:controller <nome do controlador> {-m | --mod el}
 ```
 > -m ou --model: Cria o modelo do controlador
 
-
 Serão criados os arquivos necessários para sua API, incluindo o modelo, a migração, controlador, request, resource e rotas.
+
+```bash
+php artisan pcraft:remove <nome do modelo> {-m | --migration} {-c | --controller} {--controller-only} {migration-only}
+```
+> -m ou --migration: Remove a migração do modelo
+
+> -c ou --controller: Remove o controlador do modelo
+
+> --controller-only: Remove apenas o controlador do modelo
+
+> --migration-only: Remove apenas a migração do modelo
+
+Serão removidos os arquivos criados pelo comando pcraft:model
 
 
 ## Publicação dos Modelos
