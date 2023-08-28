@@ -107,15 +107,19 @@ class CraftController extends Command
         //add route
         $routeFile = base_path("routes/api.php");
         $routeContent = file_get_contents($routeFile);
-        $routeContent .= "\nRoute::apiResource('".strtolower($name)."', \App\Http\Controllers\\{$name}Controller::class);\n";
+        $routeContent .= "\nRoute::apiResource('".$this->snakeCase($name)."', \App\Http\Controllers\\{$name}Controller::class);\n";
         if($soft) {
-            $routeContent .= "Route::put('".strtolower($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n";
+            $routeContent .= "Route::put('".$this->snakeCase($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n";
         }
         file_put_contents($routeFile, $routeContent);
 
         echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Rota criada! \e[0m\n";
 
 
+    }
+
+    public function snakeCase($string) {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
     }
 
     private function restoreFunction($name){

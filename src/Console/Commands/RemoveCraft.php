@@ -109,6 +109,11 @@ class RemoveCraft extends Command
         }else{
             echo "\n   \e[41m ERROR \e[0m\e[49m\e[97m Request {$updateRequest} não encontrado! \e[0m\n";
         }
+
+        $routes = file_get_contents(base_path('routes/api.php'));
+        $routes = str_replace("Route::apiResource('{$this->snakeCase($name)}',\App\Http\Controllers\\{$name}Controller::class);\n", '', $routes);
+        $routes = str_replace("Route::put('{$this->snakeCase($name)}/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n", '', $routes);
+        file_put_contents(base_path('routes/api.php'), $routes);
     }
 
     public function removeModel($name){

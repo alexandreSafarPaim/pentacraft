@@ -6,7 +6,7 @@ Pentacraft is a powerful and efficient library designed to facilitate the creati
 
 > Development model: Pentagrama Consulting and Systems
 
-> Current release: v1.3.5
+> Current release: v1.3.6
 
 ***[**&rarr; Documentation in portuguese**](../README.md)***
 
