@@ -111,8 +111,8 @@ class RemoveCraft extends Command
         }
 
         $routes = file_get_contents(base_path('routes/api.php'));
-        $routes = str_replace("Route::apiResource('{$this->snakeCase($name)}',\App\Http\Controllers\\{$name}Controller::class);\n", '', $routes);
-        $routes = str_replace("Route::put('{$this->snakeCase($name)}/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n", '', $routes);
+        $routes = str_replace("\nRoute::apiResource('".$this->snakeCase($name)."', \App\Http\Controllers\\{$name}Controller::class);\n", '', $routes);
+        $routes = str_replace("Route::put('".$this->snakeCase($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n", '', $routes);
         file_put_contents(base_path('routes/api.php'), $routes);
     }
 
