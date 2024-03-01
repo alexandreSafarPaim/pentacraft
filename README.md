@@ -37,7 +37,7 @@ php artisan pcraft:model <nome do modelo> {-m | --migration} {-c | --controller}
 > -s ou --soft: Adiciona o soft delete ao modelo
 
 ```bash
-php artisan pcraft:controller <nome do controlador> {-m | --mod el}
+php artisan pcraft:controller <nome do controlador> {-m | --model}
 ```
 > -m ou --model: Cria o modelo do controlador
 
