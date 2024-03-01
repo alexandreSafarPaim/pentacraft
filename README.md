@@ -22,7 +22,7 @@ O Pentacraft é uma biblioteca poderosa e eficiente desenvolvida para facilitar 
 Para começar a utilizar o Pentacraft, siga esta etapa:
 
 ```bash
-composer require alexandresafarpaim/pentacraft
+composer require --dev alexandresafarpaim/pentacraft
 ```
 
 ## Comandos
