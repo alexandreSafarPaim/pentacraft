@@ -107,9 +107,9 @@ class CraftController extends Command
         //add route
         $routeFile = base_path("routes/api.php");
         $routeContent = file_get_contents($routeFile);
-        $routeContent .= "\nRoute::apiResource('".$this->snakeCase($name)."', \App\Http\Controllers\\{$name}Controller::class);\n";
+        $routeContent .= "\nRoute::apiResource('".$this->kebabCase($name)."', \App\Http\Controllers\\{$name}Controller::class);\n";
         if($soft) {
-            $routeContent .= "Route::put('".$this->snakeCase($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n";
+            $routeContent .= "Route::put('".$this->kebabCase($name)."/restore/{id}', [\App\Http\Controllers\\{$name}Controller::class, 'restore']);\n";
         }
         file_put_contents($routeFile, $routeContent);
 
@@ -120,6 +120,10 @@ class CraftController extends Command
 
     public function snakeCase($string) {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+    }
+
+    public function kebabCase($string) {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $string));
     }
 
     private function restoreFunction($name){
