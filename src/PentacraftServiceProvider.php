@@ -31,7 +31,7 @@ class PentacraftServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if (!file_exists(base_path('.env'))) {
+        /**if (!file_exists(base_path('.env'))) {
             $this->error('Arquivo .env não encontrado!');
         }else{
             $env = file_get_contents(base_path('.env'));
@@ -43,6 +43,6 @@ class PentacraftServiceProvider extends ServiceProvider
                 $env .= "\nPENTACRAFT_CONTROLLER=";
                 file_put_contents(base_path('.env'), $env);
             }
-        }
+        }**/
     }
 }
