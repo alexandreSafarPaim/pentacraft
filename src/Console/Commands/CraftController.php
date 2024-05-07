@@ -44,7 +44,7 @@ class CraftController extends Command
             echo "\n   \e[41m ERROR \e[0m\e[49m\e[97m Resource {$name}Resource já existe! \e[0m\n";
         }else{
             $this->callSilent('make:resource', ['name' => "{$name}Resource"]);
-            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Resource {$name}Resource criado! \e[0m\n";
+            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Resource {$name}Resource criado em app/Http/Resources/{$name}Resource.php! \e[0m\n";
         }
 
         if(file_exists(app_path("Http/Requests/Create{$name}Request.php"))){
@@ -55,7 +55,7 @@ class CraftController extends Command
             $contentCreateRequest  = file_get_contents($fileCreateRequest);
             $contentCreateRequest  = preg_replace('/return false;/i', "return true;", $contentCreateRequest );
             file_put_contents($fileCreateRequest, $contentCreateRequest );
-            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Request Create{$name}Request criado! \e[0m\n";
+            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Request Create{$name}Request criado em app/Http/Requests/Create{$name}Request.php! \e[0m\n";
         }
 
         if(file_exists(app_path("Http/Requests/Update{$name}Request.php"))){
@@ -66,7 +66,7 @@ class CraftController extends Command
             $contentUpdateRequest  = file_get_contents($fileUpdateRequest);
             $contentUpdateRequest  = preg_replace('/return false;/i', "return true;", $contentUpdateRequest );
             file_put_contents($fileUpdateRequest, $contentUpdateRequest );
-            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Request Update{$name}Request criado! \e[0m\n";
+            echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Request Update{$name}Request criado em app/Http/Requests/Update{$name}Reques.php! \e[0m\n";
         }
 
         //Cobtroller
@@ -102,7 +102,7 @@ class CraftController extends Command
         $fileController = app_path("Http/Controllers/{$name}Controller.php");
         file_put_contents($fileController, $content);
 
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Controller " . $name ." criado! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Controller {$name}Controller criado em app/Http/Controllers/{$name}Controller.php! \e[0m\n";
 
         //add route
         $routeFile = base_path("routes/api.php");
