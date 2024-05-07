@@ -55,7 +55,7 @@ class CraftModel extends Command
         $file = app_path("Models/{$name}.php");
         file_put_contents($file, $content);
 
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Model ". $name ." criado! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Model ". $name ." criado em: Models/{$name}.php! \e[0m\n";
 
 
         //Migration
