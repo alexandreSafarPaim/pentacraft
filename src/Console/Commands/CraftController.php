@@ -102,7 +102,7 @@ class CraftController extends Command
         $fileController = app_path("Http/Controllers/{$name}Controller.php");
         file_put_contents($fileController, $content);
 
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Controller criado! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Controller " . $name ." criado! \e[0m\n";
 
         //add route
         $routeFile = base_path("routes/api.php");
@@ -113,7 +113,7 @@ class CraftController extends Command
         }
         file_put_contents($routeFile, $routeContent);
 
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Rota criada! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Rota criada em routes/api.php! \e[0m\n";
 
 
     }
