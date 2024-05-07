@@ -55,7 +55,7 @@ class CraftModel extends Command
         $file = app_path("Models/{$name}.php");
         file_put_contents($file, $content);
 
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Model criado! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Model ". $name .".php criado! \e[0m\n";
 
 
         //Migration
@@ -69,7 +69,7 @@ class CraftModel extends Command
             $content = preg_replace('/\$table->id\(\);/i', "\$table->id();\n            \$table->softDeletes();", $content);
             file_put_contents($file, $content);
         }
-        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Migration criada! \e[0m\n";
+        echo "\n   \e[104m INFO \e[0m\e[49m\e[97m Migration create_". $this->pluralize($this->snakeCase($name)) ."_table.php criada! \e[0m\n";
 
 
         //Controller
